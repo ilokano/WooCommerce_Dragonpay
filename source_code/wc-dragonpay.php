@@ -23,7 +23,7 @@ function wcdragonpay_woocommerce_fallback_notice() {
 add_action( 'plugins_loaded', 'wcdragonpay_gateway_load', 0 );
 
 /**
- * Load MOLPay gateway plugin function
+ * Load Dragonpay gateway plugin function
  * 
  * @return mixed
  */
@@ -39,7 +39,7 @@ function wcdragonpay_gateway_load() {
     add_filter( 'woocommerce_payment_gateways', 'wcdragonpay_add_gateway' );
 
     /**
-     * Add MOLPay gateway to ensure WooCommerce can load it
+     * Add Dragonpay gateway to ensure WooCommerce can load it
      * 
      * @param array $methods
      * @return array
@@ -50,7 +50,7 @@ function wcdragonpay_gateway_load() {
     }
 
     /**
-     * Define the MOLPay gateway
+     * Define the Dragonpay gateway
      * 
      */
     class WC_Dragonpay_Gateway extends WC_Payment_Gateway {
