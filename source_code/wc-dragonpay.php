@@ -284,16 +284,7 @@ function wcdragonpay_gateway_load() {
         function check_dragonpay_response_returnurl() {
             global $woocommerce;
 
-            $amount = $_POST['amount'];
-            $orderid = $_POST['orderid'];
-            $appcode = $_POST['appcode'];
-            $tranID = $_POST['tranID'];
-            $domain = $_POST['domain'];
-            $status = $_POST['status'];
-            $currency = $_POST['currency'];
-            $paydate = $_POST['paydate'];
-            $channel = $_POST['channel'];
-            $skey = $_POST['skey'];
+            
 
             $vkey = $this->password;
             $order = new WC_Order( $orderid );
