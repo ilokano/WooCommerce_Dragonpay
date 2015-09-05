@@ -1,7 +1,9 @@
 WooCommerce_Dragonpay_plugin
 ============================
 Dragonpay payment plugin for WooCommerce Shopping Extension
-This is tested up to 4.3 Wordpress version. Take note, you will custom the response parameters sent back to you from dragonpay once payment is process. The function is not included with this plugin.
+This is tested up to 4.3 Wordpress version. 
+Take note!
+I did not include the return/response function that dragonpay sent back after payment is processes, you will add the response parameters sent back to you from dragonpay once payment is process. The function is not included with this plugin.
 
 
  * Dragonpay WooCommerce Shopping Cart Plugin
