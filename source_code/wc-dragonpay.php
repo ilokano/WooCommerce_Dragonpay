@@ -78,7 +78,7 @@ function wcdragonpay_gateway_load() {
             $this->icon = plugins_url( 'images/dragonpay.png', __FILE__ );
             $this->has_fields = false;
             $this->pay_url = 'http://test.dragonpay.ph/Pay.aspx?';
-            $this->method_title = __( 'dragonpay', 'wcdragonpay' );
+            $this->method_title = __( 'Dragonpay', 'wcdragonpay' );
 
             // Load the form fields.
             $this->init_form_fields();
@@ -144,7 +144,7 @@ function wcdragonpay_gateway_load() {
                 'enabled' => array(
                     'title' => __( 'Enable/Disable', 'wcdragonpay' ),
                     'type' => 'checkbox',
-                    'label' => __( 'Enable dragonpay', 'wcdragonpay' ),
+                    'label' => __( 'Enable Dragonpay', 'wcdragonpay' ),
                     'default' => 'yes'
                 ),
                 'title' => array(
@@ -168,7 +168,7 @@ function wcdragonpay_gateway_load() {
                 'password' => array(
                     'title' => __( 'Password', 'wcdragonpay' ),
                     'type' => 'text',
-                    'description' => __( 'Please enter your Ddragonpay password.', 'wcdragonpay' ) . ' ' . sprintf( __( 'You can to get this information in: %sdragonpay Account%s.', 'wcdragonpay' ), '<a href="https://www.dragonpay.ph/" target="_blank">', '</a>' ),
+                    'description' => __( 'Please enter your Dragonpay password.', 'wcdragonpay' ) . ' ' . sprintf( __( 'You can to get this information in: %sdragonpay Account%s.', 'wcdragonpay' ), '<a href="https://www.dragonpay.ph/" target="_blank">', '</a>' ),
                     'default' => ''
                 )
             );
