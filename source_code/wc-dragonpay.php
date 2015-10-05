@@ -2,8 +2,8 @@
 /**
  * Dragonpay WooCommerce Shopping Cart Plugin
  * 
- * @author Dennis Paler<dpaler@shockwebstudio.com>
- * @version 1.1.0
+ * @author Dennis P<dpaler@shockwebstudio.com>
+ * @version 1.2.0
  * @example For callback : http://shoppingcarturl/?wc-api=WC_Dragonpay_Gateway
  * 
  */
@@ -12,11 +12,11 @@
  * Plugin Name: WooCommerce Dragonpay
  * Plugin URI: http://www.shockwebstudio.com/
  * Description: Dragonpay | The leading payment gateway in the Philippines with dragonpay payment solutions & free features: Physical Payment at 7-Eleven, Seamless Checkout, Tokenization, Loyalty Program and more for WooCommerce v2.3
- * Author: Denns Paler
+ * Author: Denns P
  * Author URI: http:/www.shockwebstudio.com/
- * Version: 1.1.0
+ * Version: 1.2.0
  * License: MIT
- * For callback : http://shoppingcarturl/?wc-api=WC_Dragonpay_Gateway
+ * For callback : http://shoppingcarturl.com/?wc-api=WC_Dragonpay_Gateway
  */
 
 /**
@@ -77,7 +77,6 @@ function wcdragonpay_gateway_load() {
             $this->id = 'dragonpay';
             $this->icon = plugins_url( 'images/dragonpay.png', __FILE__ );
             $this->has_fields = false;
-            $this->pay_url = 'http://test.dragonpay.ph/Pay.aspx?';
             $this->method_title = __( 'Dragonpay', 'wcdragonpay' );
 
             // Load the form fields.
@@ -91,6 +90,15 @@ function wcdragonpay_gateway_load() {
             $this->description = $this->settings['description'];
             $this->merchant_id = $this->settings['merchant_id'];
             $this->password = $this->settings['password'];
+            $this->testmode  = $this->settings['testmode'];
+
+            //Checking if testmode is enabled
+            if ( $this->testmode == 'Yes' ) {
+               $this->pay_url = 'http://test.dragonpay.ph/Pay.aspx?';
+            } else {
+               $this->pay_url = 'https://gw.dragonpay.ph/Pay.aspx?';
+            }
+            
 
             // Actions.
             add_action( 'valid_dragonpay_request_returnurl', array( &$this, 'check_dragonpay_response_returnurl' ) );
@@ -170,7 +178,13 @@ function wcdragonpay_gateway_load() {
                     'type' => 'text',
                     'description' => __( 'Please enter your Dragonpay password.', 'wcdragonpay' ) . ' ' . sprintf( __( 'You can to get this information in: %sdragonpay Account%s.', 'wcdragonpay' ), '<a href="https://www.dragonpay.ph/" target="_blank">', '</a>' ),
                     'default' => ''
-                )
+                ),
+                 'testmode' => array(
+                    'title' => __( 'Enable/Disable', 'wcdragonpay' ),
+                    'type' => 'checkbox',
+                    'label' => __( 'Enable Test Mode', 'wcdragonpay' ),
+                    'default' => 'yes'
+                ),
             );
         }
 
@@ -276,9 +290,17 @@ function wcdragonpay_gateway_load() {
         function check_dragonpay_response_returnurl() {
             global $woocommerce;
             
-            /*
-            *  Write your code here...Get response parameters sent back from Dragonpay
-            */
+            //Get response parameters from dragonpay
+            $merchantid = $this->merchant_id;
+            $orderid = $_GET['txnid'];
+            $ref_no = $_GET['refno'];
+            $status = $_GET['status'];
+            $result = $_GET['message'];
+            $passwd = $this->password;
+            $rdigest_str = "$order_id:$ref_no:$status:$result:$passwd";
+            $chk_rdigest = sha1($rdigest_str);  
+
+            $order = new WC_Order( $orderid );
 
             if ($status == 'S') {
                 $order->add_order_note('dragonpay Payment Status: SUCCESSFUL');								
