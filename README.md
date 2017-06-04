@@ -24,6 +24,8 @@ This WooCommerce plugin allows to integrate Dragonpay API to your woocommerce we
 1. Admin settings
 
 == Changelog ==
+= version 2.0.0 =
+* fix callback and postback
 = version 1.2.0 =
 * add test/sandbox environment option
 * add response function
